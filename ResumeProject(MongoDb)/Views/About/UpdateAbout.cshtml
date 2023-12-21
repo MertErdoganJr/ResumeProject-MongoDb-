@@ -1,0 +1,20 @@
+﻿@model ResumeProject_MongoDb_.DAL.Entities.About
+
+@{
+    Layout = null;
+}
+<br />
+<br />
+
+<form method="post">
+    <label>Hakkımızda ID</label>
+    <input type="text" asp-for="AboutID" class="form-control" />
+    <br />
+    <label>Başlık</label>
+    <input type="text" asp-for="Title" class="form-control" />
+    <br />
+    <label>Açıklama</label>
+    <input type="text" asp-for="Description" class="form-control" />
+    <br />
+    <button class="btn btn-success">Hakkımda Yazısını Güncelle</button>
+</form>
