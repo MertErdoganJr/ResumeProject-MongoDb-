@@ -1,31 +1,33 @@
 ﻿@model List<ResumeProject_MongoDb_.DAL.Entities.About>
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
 }
 
-<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 
 <br /><br />
-<div class="container">
+<div>
     <table class="table table-hover">
         <tr>
             <th>#</th>
-            <th>Hakkımızda Başlık</th>
-            <th>Hakkımızda Açıklama</th>
-            <th>Sil</th>
-            <th>Güncelle</th>
+            <th>Name</th>
+            <th>Title</th>
+            <th>Delete</th>
+            <th>Update</th>
         </tr>
         @foreach(var item in Model)
         {
+            count++;
             <tr>
-                <td>@item.AboutID</td>
+                <td>@count</td>
                 <td>@item.Title</td>
                 <td>@item.Description</td>
-                <td><a href="/About/DeleteAbout/@item.AboutID" class="btn btn-danger">Sil</a></td>
-                <td><a href="/About/UpdateAbout/@item.AboutID" class="btn btn-success">Güncelle</a></td>
+                <td><a href="/About/DeleteAbout/@item.AboutID" class="btn btn-danger">Delete</a></td>
+                <td><a href="/About/UpdateAbout/@item.AboutID" class="btn btn-success">Update</a></td>
             </tr>
         }
     </table>
-    <a href="/About/CreateAbout/" class="btn btn-primary">Yeni Hakkımızda Yazısı</a>
+    <a href="/About/CreateAbout/" class="btn btn-primary">New Person</a>
 </div>
