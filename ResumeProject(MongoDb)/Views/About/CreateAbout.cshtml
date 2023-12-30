@@ -1,7 +1,7 @@
 ﻿@model ResumeProject_MongoDb_.DAL.Entities.About
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <br />
@@ -9,12 +9,12 @@
 
 <div class="container">
     <form method="post">
-        <label>Başlık</label>
+        <label>Title</label>
         <input type="text" asp-for="Title" class="form-control" />
         <br />
-        <label>Açıklama</label>
+        <label>Description</label>
         <input type="text" asp-for="Description" class="form-control" />
         <br />
-        <button class="btn btn-primary">Yazıyı Kaydet</button>
+        <button class="btn btn-primary">Create New Person</button>
     </form>
 </div>
