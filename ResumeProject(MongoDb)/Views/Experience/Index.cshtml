@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<div>
+    <br />
+    <h3>Function Buttons</h3>
+    <button type="button" id="btnexperincelist" class="btn btn-outline-primary">Experince List</button>
+    <button type="button" id="btnexperincecreate" class="btn btn-outline-success">Add Experince</button>
+    <button type="button" id="btnexperinceget" class="btn btn-outline-info">Get Experince</button>
+    <button type="button" id="btnexperinceupdate" class="btn btn-outline-dark">Update Experince</button>
+    <button type="button" id="btnexperincedelete" class="btn btn-outline-danger">Delete Experince</button>
+</div>
+
+<br />
+<hr />
+
+<h3>Experince List</h3>
+<div id="experincelist"></div>
+<hr />
+
+<h3>Add Experince</h3>
+<div>
+    <input type="text" class="form-control" placeholder="Experince Title" id="txttitle" style="border:1px solid #000" />
+    <br />
+    <input type="text" class="form-control" placeholder="Experince Description" id="txtdescription" style="border:1px solid #000" />
+    <br />
+    <input type="text" class="form-control" placeholder="Year" id="txtyear" style="border:1px solid #000" />
+</div>
+
+<script>
+
+    $("#btnexperincelist").click(function () {
+        $.ajax({
+            contentType: "application/json",
+            dataType: "json",
+            type: "Get",
+            url: "/Experience/ExperienceList/",
+            success: function (funk1) {
+                let values = jQuery.parseJSON(funk1);
+                console.log(values);
+                let tablehtml = `<table class=table table-bordered>
+                                          <tr>
+                                          <th>Experince ID</th>
+                                          <th>Experince Title</th>
+                                          <th>Experince Description</th>
+                                          <th>Year</th>
+                                          </tr>`
+                $.each(values, (index, value) => {
+                    tablehtml += `<tr>
+                                            <td>${value.ExperienceID}</td>
+                                            <td>${value.Title}</td>
+                                            <td>${value.Description}</td>
+                                            <td>${value.Year}</td>
+                                            </tr>`
+                });
+                tablehtml += `</table>`;
+                $("#experincelist").html(tablehtml);
+            }
+        });
+    });
+
+    $("#btnexperincecreate").click(function () {
+        let experiencevalue = {
+            Title: $("#txttitle").val(),
+            Description: $("#txtdescription").val(),
+            Year: $("#txtyear").val()
+        };
+        $.ajax({
+            type: "post",
+            url: "/Experience/CreateExperience/",
+            data: experiencevalue,
+            success: function (funk2) {
+                let result = jQuery.parseJSON(funk2);
+                alert("Success!");
+            }
+        });
+    });
+
+</script>
