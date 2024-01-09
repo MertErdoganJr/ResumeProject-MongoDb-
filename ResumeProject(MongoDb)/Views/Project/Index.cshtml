@@ -1,0 +1,82 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+<div>
+    <br />
+    <button type="button" id="btnprojectlist" class="btn btn-outline-primary">Project List</button>
+    <button type="button" data-toggle="modal" data-target="#modal1" class="btn btn-outline-success">Add Project</button>
+    <button type="button" id="btnprojectget" class="btn btn-outline-info">Get project</button>
+    <button type="button" data-toggle="modal" data-target="#modal3" class="btn btn-outline-dark">Update Project</button>
+    <button type="button" data-toggle="modal" data-target="#modal2" class="btn btn-outline-danger">Delete Project</button>
+</div>
+
+<br />
+<hr />
+
+
+<div id="projectlist"></div>
+
+
+<div class="modal" id="modal1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Project</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="dataProjectName">Project Name:</label>
+                        <input type="text" class="form-control" id="txtname" style="border:1px solid #000">
+                        <label for="dataProjectDescription">Description:</label>
+                        <input type="text" class="form-control" id="txtdescription" style="border:1px solid #000">
+                        <label for="dataImageUrl">Image URL:</label>
+                        <input type="text" class="form-control" id="txtimageurl" style="border:1px solid #000">
+                    </div>
+                    <button type="button" id="btnprojectcreate" class="btn btn-outline-success" onclick="addData()">Add Project</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+
+    $("#btnprojectcreate").click(function () {
+        let projectvalue = {
+            Project Name: $("#txtname").val(),
+            Description: $("#txtdescription").val(),
+            Image URL: $("#txtimageurl").val()
+        };
+        $.ajax({
+            type: "post",
+            url: "/Project/CreateProject/",
+            data: projectvalue,
+            success: function (funk2) {
+                let result = jQuery.parseJSON(funk2);
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Project Added',
+                    icon: 'success',
+                    showCancelButton: false,
+                    confirmButtonText: 'Ok',
+                    cancelButtonText: 'Close'
+                });
+            }
+        });
+    });
+</script>
