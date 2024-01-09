@@ -76,7 +76,10 @@
     @await Component.InvokeAsync("_TestimonialPatial")
     <!-- Testimonial End -->
     <!-- Contact Start -->
-    @await Component.InvokeAsync("_ContactPartial")
+
+    @* @await Component.InvokeAsync("_ContactPartial") *@
+
+    @await Html.PartialAsync("~/Views/Default/SendMessage.cshtml")
     <!-- Contact End -->
     <!-- Map Start -->
     @await Component.InvokeAsync("_MapPartial")
