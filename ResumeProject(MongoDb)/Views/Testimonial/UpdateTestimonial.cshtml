@@ -1,0 +1,24 @@
+﻿@model Testimonial
+@{
+    ViewData["Title"] = "UpdateTestimonial";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<br />
+<h1>Update Testimonial</h1>
+<form method="post">
+    <label>ID</label>
+    <input type="text" class="form-control" asp-for="TestimonialID" />
+    <br />
+    <label>Name Surname</label>
+    <input type="text" class="form-control" asp-for="NameSurname" />
+    <br />
+    <label>Title</label>
+    <input type="text" class="form-control" asp-for="Title" />
+    <br />
+    <label>Comment</label>
+    <input type="text" class="form-control" asp-for="Comment" />
+    <br />
+    <button class="btn btn-primary">Update Testimonial</button>
+</form>

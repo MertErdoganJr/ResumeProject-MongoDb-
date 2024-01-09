@@ -24,6 +24,7 @@
 <div id="projectlist"></div>
 
 
+<!-- Add Popup Page-->
 <div class="modal" id="modal1">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -51,16 +52,99 @@
     </div>
 </div>
 
+<!-- Delete Popup Page-->
+<div class="modal" id="modal2">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Delete Project</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="dataProjectID">Project ID:</label>
+                        <input type="text" class="form-control" id="txtdeleteprojectid" style="border:1px solid #000">
+                    </div>
+                    <button type="button" id="btnprojectdelete" class="btn btn-outline-success" onclick="addData()">Delete Project</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
 
+        </div>
+    </div>
+</div>
+
+<!-- Update Popup Page-->
+<div class="modal" id="modal3">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Update Project</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="editdataID">Project ID:</label>
+                        <input type="text" class="form-control" id="txteditid" style="border:1px solid #000" />
+                        <label for="editdataName">Project Name:</label>
+                        <input type="text" class="form-control" id="txteditname" style="border:1px solid #000">
+                        <label for="editdataDescription">Description:</label>
+                        <input type="text" class="form-control" id="txteditdescription" style="border:1px solid #000">
+                        <label for="editdataImageUrl">Image Url:</label>
+                        <input type="text" class="form-control" id="txteditimage" style="border:1px solid #000">
+                    </div>
+                    <button type="button" id="btnprojectupdate" class="btn btn-outline-success" onclick="addData()">Update Project</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script>
 
+    $("#btnprojectlist").click(function () {
+        $.ajax({
+            contentType: "application/json",
+            dataType: "json",
+            type: "Get",
+            url: "/Project/ProjectList/",
+            success: function (funk1) {
+                let values = jQuery.parseJSON(funk1);
+                console.log(values);
+                let tablehtml = `<table class=table table-bordered>
+                                 <tr>
+                                 <th>Project ID</th>
+                                 <th>Project Name</th>
+                                 <th>Project Description</th>
+                                 <th>Image Url</th>
+                                 </tr>`
+                $.each(values, (index, value) => {
+                    tablehtml += `<tr>
+                                  <td>${value.ProjectID}</td>
+                                  <td>${value.ProjectName}</td>
+                                  <td>${value.ProjectDescription}</td>
+                                  <td>${value.ImageUrl}</td>
+                                  </tr>`
+                });
+                tablehtml += `</table>`;
+                $("#projectlist").html(tablehtml);
+            }
+        });
+    });
+
     $("#btnprojectcreate").click(function () {
         let projectvalue = {
-            Project Name: $("#txtname").val(),
-            Description: $("#txtdescription").val(),
-            Image URL: $("#txtimageurl").val()
+            ProjectName: $("#txtname").val(),
+            ProjectDescription: $("#txtdescription").val(),
+            ImageUrl: $("#txtimageurl").val()
         };
         $.ajax({
             type: "post",
@@ -79,4 +163,48 @@
             }
         });
     });
+
+    $("#btnprojectdelete").click(function () {
+        let id = $("#txtdeleteprojectid").val();
+        $.ajax({
+            url: "/Project/DeleteProject/" + id,
+            type: "Get",
+            contentType: "application/json",
+            success: function (funk4) {
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Experience Deleted',
+                    icon: 'success',
+                    showCancelButton: false,
+                    confirmButtonText: 'Ok',
+                    cancelButtonText: 'Close'
+                });
+            }
+        });
+    });
+
+    $("#btnprojectupdate").click(function () {
+        let values = {
+            ProjectID: $("#txteditid").val(),
+            ProjectName: $("#txteditname").val(),
+            ProjectDescription: $("#txteditdescription").val(),
+            ImageUrl: $("#txteditimage").val()
+        };
+        $.ajax({
+            url: "/Project/UpdateProject/",
+            type: "post",
+            data: values,
+            success: function (funk5) {
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Project Updated',
+                    icon: 'success',
+                    showCancelButton: false,
+                    confirmButtonText: 'Ok',
+                    cancelButtonText: 'Close'
+                });
+            }
+        });
+    });
+
 </script>
