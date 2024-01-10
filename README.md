@@ -2,8 +2,7 @@
 ***M&Y Yazılım Akademi Full Stack .Net Development - Portfolyo site projesi.***
 
 # Proje Hakkında
-***
-MongoDb gibi farklı veritabanı kullanarak bir Protfolyo sitesi tasarladık. Crud işlemlerinin Ajax üstünden yaparak farklı yöntemler ile yeni projeler geliştirmeyi hedefledik.
+***MongoDb gibi farklı veritabanı kullanarak bir Protfolyo sitesi tasarladık. Crud işlemlerinin Ajax üstünden yaparak farklı yöntemler ile yeni projeler geliştirmeyi hedefledik.
 Projede dinamik şekilde Ajax üstünden CRUD işlemleri yaparak site içerisindeki bütün alanları yönetim panelleri sayesinde düzenleyebiliyoruz.***
 
 # Kullanılan Teknolojiler
