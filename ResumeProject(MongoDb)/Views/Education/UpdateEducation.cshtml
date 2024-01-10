@@ -1,0 +1,27 @@
+﻿@model Education
+
+@{
+    ViewData["Title"] = "UpdateEducation";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<br />
+<h1>Update Education</h1>
+<form method="post">
+    <label>ID</label>
+    <input type="text" class="form-control" asp-for="EducationID" />
+    <br />
+    <label>Education Name</label>
+    <input type="text" class="form-control" asp-for="Title" />
+    <br />
+    <label>Education Description</label>
+    <input type="text" class="form-control" asp-for="Description" />
+    <br />
+    <label>Education Years</label>
+    <input type="text" class="form-control" asp-for="Year" />
+    <br />
+    <button class="btn btn-primary">Update Education</button>
+</form>
+
+

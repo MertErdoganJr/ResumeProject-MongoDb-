@@ -1,0 +1,36 @@
+﻿@model List<Education>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+<br />
+<br />
+<div>
+    <table class="table table-hover">
+        <tr>
+            <th>No</th>
+            <th>Education Name</th>
+            <th>Education Description</th>
+            <th>Education Years</th>
+            <th>Detele</th>
+            <th>Update</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            count++;
+            <tr>
+                <td>@count</td>
+                <td>@item.Title</td>
+                <td>@item.Description</td>
+                <td>@item.Year</td>
+                <td><a href="/Education/DeleteEducation/@item.EducationID/" class="btn btn-danger">Delete</a></td>
+                <td><a href="/Education/UpdateEducation/@item.EducationID/" class="btn btn-success">Update</a></td>
+            </tr>
+        }
+    </table>
+    <a href="/Education/CreateEducation/" class="btn btn-primary">Add New Education</a>
+</div>
+

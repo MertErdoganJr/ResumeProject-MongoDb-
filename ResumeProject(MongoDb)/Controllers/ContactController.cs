@@ -27,10 +27,10 @@ namespace ResumeProject_MongoDb_.Controllers
 
         }
 
-        public async Task<IActionResult> MessageDetail(string id)
-        {
-            var values = await _contactCollcetion.Find(x => x.ContactID == id).FirstOrDefaultAsync();
-            return View(values);
-        }
+        //public async Task<IActionResult> MessageDetail(string id)
+        //{
+        //    var values = await _contactCollcetion.Find(x => x.ContactID == id).FirstOrDefaultAsync();
+        //    return View(values);
+        //}
     }
 }
